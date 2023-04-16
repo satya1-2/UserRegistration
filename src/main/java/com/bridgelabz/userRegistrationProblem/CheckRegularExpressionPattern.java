@@ -10,13 +10,13 @@ public class CheckRegularExpressionPattern {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your password : ");
         String password = scanner.next();
-        String regex = "^(?=.*[A-Z]).{8,}$";
+        String regex = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$";
         //Creating a pattern object
         Pattern pattern = Pattern.compile(regex);
         //Creating a Matcher object
         Matcher matcher = pattern.matcher(password);
         if (matcher.matches()) {
-            System.out.println("Given password  is valid");
+            System.out.println("Given at least one upper case and one number in password  is valid");
         } else {
             System.out.println("Given password  is not valid");
         }
