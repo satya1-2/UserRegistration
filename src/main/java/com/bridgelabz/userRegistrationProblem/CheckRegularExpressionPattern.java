@@ -6,28 +6,27 @@ import java.util.regex.Pattern;
 
 public class CheckRegularExpressionPattern {
 
-    public void validUserEmailCheck() {
-
+    public void checkPassword() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your email id: ");
-        String gmail = scanner.next();
-        String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+        System.out.println("Enter your password : ");
+        String password = scanner.next();
+        String regex = "^.{8,}$";
         //Creating a pattern object
         Pattern pattern = Pattern.compile(regex);
         //Creating a Matcher object
-        Matcher matcher = pattern.matcher(gmail);
+        Matcher matcher = pattern.matcher(password);
         if (matcher.matches()) {
-            System.out.println("Given email id is valid");
+            System.out.println("Given password  is valid");
         } else {
-            System.out.println("Given email id is not valid");
+            System.out.println("Given password  is not valid");
         }
     }
 
-
     public static void main(String[] args) {
         CheckRegularExpressionPattern search = new CheckRegularExpressionPattern();
-        search.validUserEmailCheck();
+        search.checkPassword();
 
     }
 }
+
 
