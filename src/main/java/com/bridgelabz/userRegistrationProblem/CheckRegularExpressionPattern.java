@@ -5,70 +5,79 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@FunctionalInterface
+interface FirstName {
+    public abstract String checkName(String name);
 
-                        public class CheckRegularExpressionPattern {
+    class CheckRegularExpressionPattern {
+        public static void main(String[] args) {
+            // Lambda expression with single parameter.
+            FirstName name1 = (name) -> {
+                return name;
+            };
+            System.out.println(name1.checkName("Satya"));
 
-                            private String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-                            private Pattern pattern = Pattern.compile(regex);
-
-                            public void validateFirstName(String firstName) throws InvalidFirstNameException {
-                                if (firstName.isEmpty()) {
-                                    throw new InvalidFirstNameException("Invalid first name");
-                                }
-                            }
-
-                            public void validateLastName(String lastName) throws InvalidLastNameException {
-                                if (lastName.isEmpty()) {
-                                    throw new InvalidLastNameException("Invalid last name");
-                                }
-                            }
-
-                            public void validateEmail(String email) throws InvalidEmailException {
-                                Matcher matcher = pattern.matcher(email);
-                                if (!matcher.matches()) {
-                                    throw new InvalidEmailException("Invalid email");
-                                }
-                            }
-
-                            public void validateMobile(String mobile) throws InvalidMobileException {
-                                if (mobile.length() != 10) {
-                                    throw new InvalidMobileException("Invalid mobile");
-                                }
-                            }
-
-                            public void validatePassword(String password) throws InvalidPasswordException {
-                                if (password.length() < 8) {
-                                    throw new InvalidPasswordException("Invalid password");
-                                }
-                            }
-                        }
-
-class InvalidFirstNameException extends Exception {
-    public InvalidFirstNameException(String message) {
-        super(message);
+        }
     }
 }
 
-class InvalidLastNameException extends Exception {
-    public InvalidLastNameException(String message) {
-        super(message);
+@FunctionalInterface
+interface LastName {
+    public abstract String checkLastName(String name);
+
+    class UserRegistration {
+        public static void main(String[] args) {
+            // Lambda expression with single parameter.
+            LastName lastName1 = (name) -> {
+                return name;
+            };
+            System.out.println(lastName1.checkLastName("Yadav"));
+
+        }
     }
 }
+@FunctionalInterface
+interface PhoneNumber {
+    public abstract String checkPhoneNumber(String phoneNumber);
 
-class InvalidEmailException extends Exception {
-    public InvalidEmailException(String message) {
-        super(message);
+    class UserRegistration {
+        public static void main(String[] args) {
+            // Lambda expression with single parameter.
+            PhoneNumber phoneNumber1 = (phoneNumber) -> {
+                return phoneNumber;
+            };
+            System.out.println(phoneNumber1.checkPhoneNumber("+91789543456"));
+
+        }
     }
 }
+@FunctionalInterface
+interface Email {
+    public abstract String checkGmail(String gmailId);
 
-class InvalidMobileException extends Exception {
-    public InvalidMobileException(String message) {
-        super(message);
+    class UserRegistration {
+        public static void main(String[] args) {
+            // Lambda expression with single parameter.
+            Email gmailId1 = (gmailId) -> {
+                return "gmail:"+ gmailId;
+            };
+            System.out.println(gmailId1.checkGmail("sspra143@gmail"));
+
+        }
     }
 }
+@FunctionalInterface
+interface Password {
+    public abstract String checkPassword(String password);
 
-public class InvalidPasswordException extends Exception {
-    public InvalidPasswordException(String message) {
-        super(message);
+    class UserRegistration {
+        public static void main(String[] args) {
+            // Lambda expression with single parameter.
+            Password password1 = (password) -> {
+                return "password:" + password;
+            };
+            System.out.println(password1.checkPassword("Satya124@3456.com"));
+
+        }
     }
 }
