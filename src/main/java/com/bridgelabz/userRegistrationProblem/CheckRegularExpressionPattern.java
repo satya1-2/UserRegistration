@@ -7,61 +7,68 @@ import java.util.regex.Pattern;
 
 
                         public class CheckRegularExpressionPattern {
-                            public void checkFirstName () {
-                                    Pattern p = Pattern.compile("[a-zA-Z]{3,}");
-                                    Matcher m = p.matcher("Satya");
-                                    boolean b = m.matches();
-                                    System.out.println(b);
-                                }
 
-                                public void checkLastName () {
-                                    Pattern p = Pattern.compile("[a-zA-Z]{3,}");
-                                    Matcher m = p.matcher("yadav");
-                                    boolean b = m.matches();
-                                    System.out.println(b);
-                                }
+                            private String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+                            private Pattern pattern = Pattern.compile(regex);
 
-                                public void checkPhoneNumber () {
-                                    String regex = "^[+]{1}(?:[0-9\\-\\(\\)\\/\\.]\\s?){6,15}[0-9]{1}$";
-                                    Pattern pattern = Pattern.compile(regex);
-                                    Matcher matcher = pattern.matcher("+917052606198");
-                                    if (matcher.matches()) {
-                                        System.out.println("Given phone number  is valid");
-                                    } else {
-                                        System.out.println("Given phone number  is not valid");
-
-                                    }
-                                }
-
-                                public void checkPassword () {
-                                    String regex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-                                    Pattern pattern = Pattern.compile(regex);
-                                    Matcher matcher = pattern.matcher("Satya1234@");
-                                    if (matcher.matches()) {
-                                        System.out.println("Given password  is valid");
-                                    } else {
-                                        System.out.println("Given password  is not valid");
-                                    }
-                                }
-
-                                public void checkEmail () {
-                                    String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
-                                    Pattern pattern = Pattern.compile(regex);
-                                    Matcher matcher = pattern.matcher("sspra143@gmail.com");
-                                    if (matcher.matches()) {
-                                        System.out.println("Given email id is valid");
-                                    } else {
-                                        System.out.println("Given email id is not valid");
-                                    }
-                                }
-
-
-                                public static void main (String[]args){
-                                    CheckRegularExpressionPattern search = new CheckRegularExpressionPattern();
-                                    search.checkFirstName();
-                                    search.checkLastName();
-                                    search.checkPhoneNumber();
-                                    search.checkPassword();
-                                    search.checkEmail();
+                            public void validateFirstName(String firstName) throws InvalidFirstNameException {
+                                if (firstName.isEmpty()) {
+                                    throw new InvalidFirstNameException("Invalid first name");
                                 }
                             }
+
+                            public void validateLastName(String lastName) throws InvalidLastNameException {
+                                if (lastName.isEmpty()) {
+                                    throw new InvalidLastNameException("Invalid last name");
+                                }
+                            }
+
+                            public void validateEmail(String email) throws InvalidEmailException {
+                                Matcher matcher = pattern.matcher(email);
+                                if (!matcher.matches()) {
+                                    throw new InvalidEmailException("Invalid email");
+                                }
+                            }
+
+                            public void validateMobile(String mobile) throws InvalidMobileException {
+                                if (mobile.length() != 10) {
+                                    throw new InvalidMobileException("Invalid mobile");
+                                }
+                            }
+
+                            public void validatePassword(String password) throws InvalidPasswordException {
+                                if (password.length() < 8) {
+                                    throw new InvalidPasswordException("Invalid password");
+                                }
+                            }
+                        }
+
+class InvalidFirstNameException extends Exception {
+    public InvalidFirstNameException(String message) {
+        super(message);
+    }
+}
+
+class InvalidLastNameException extends Exception {
+    public InvalidLastNameException(String message) {
+        super(message);
+    }
+}
+
+class InvalidEmailException extends Exception {
+    public InvalidEmailException(String message) {
+        super(message);
+    }
+}
+
+class InvalidMobileException extends Exception {
+    public InvalidMobileException(String message) {
+        super(message);
+    }
+}
+
+public class InvalidPasswordException extends Exception {
+    public InvalidPasswordException(String message) {
+        super(message);
+    }
+}
